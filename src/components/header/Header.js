@@ -4,7 +4,6 @@ import {
   faCab,
   faCalendarDays,
   faCar,
-  faLocation,
   faLocationDot,
   faPerson,
   faPlane,
@@ -15,10 +14,12 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format } from 'date-fns'
 import "./header.css";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({type}) => {
-
+  const navigate = useNavigate();
   const [openDate, setOpenDate]=useState(false)
+  const [destination, setDestination]=useState("")
   const [openOptions, setOpenOptions]=useState(false)
   const [options, setOptions]=useState({
       adult: 1,
@@ -41,6 +42,9 @@ const Header = ({type}) => {
         }})
   }
 
+  const handleSearch = ()=>{
+    navigate("/hotels", {state:{destination, date, options}})
+  }
 
   return (
     <div className="header">
@@ -67,7 +71,7 @@ const Header = ({type}) => {
             <span>Attractions </span>
           </div>
         </div>
-        { type!="list" && <> <h1 className="headerTitle">Viaja por argentina.</h1>
+        { type!=="list" && <> <h1 className="headerTitle">Viaja por argentina.</h1>
         <p className="headerDesc">
           Plataforma para encontrar los mejores hoteles y vuelos dentro del
           pais. Nosotros nos preocupamos asi vos puedas disfrutar{" "}
@@ -80,6 +84,7 @@ const Header = ({type}) => {
               type="text"
               placeholder="Donde quieres ir?"
               className="headerSearchInput"
+              onChange={e=>setDestination(e.target.value)}
             />
           </div>
           <div className="headerSearchItem">
@@ -88,6 +93,7 @@ const Header = ({type}) => {
             {openDate && <DateRange
               editableDateInputs={true}
               onChange={(item) => setDate([item.selection])}
+              minDate={new Date()}
               moveRangeOnFirstSelection={false}
               ranges={date}
               className="date"
@@ -125,7 +131,7 @@ const Header = ({type}) => {
             </div>}
           </div>
           <div className="headerSearchItem">
-            <button className="headerButton">Buscar</button>
+            <button className="headerButton" onClick={handleSearch}>Buscar</button>
           </div>
         </div> </>}
       </div>

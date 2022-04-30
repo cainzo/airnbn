@@ -1,0 +1,32 @@
+.pList{
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.pListItem{
+    flex: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: rgba(243, 242, 242, 0.466);
+    text-align: start;
+    
+}
+.pListImg{
+    width: 100%;
+    object-fit: cover;
+    height: 150px;
+}
+.pListTitles>h1{
+        padding-left: 5px;
+        font-size: 18px;
+}
+.pListTitles>h2{
+    padding-left: 5px;
+
+    font-size: 14px;
+    font-weight: 300;
+    color: rgb(94, 93, 93);
+}
